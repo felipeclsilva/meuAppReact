@@ -1,4 +1,4 @@
-import Footer from "./Footer.jsx"
+import Footer from "./Footer.jsx";
 
 export default function Card({ title }) {
   return (
@@ -14,5 +14,5 @@ export default function Card({ title }) {
       </p>
       <Footer />
     </div>
-  )
+  );
 }
