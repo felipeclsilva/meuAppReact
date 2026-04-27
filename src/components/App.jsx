@@ -5,9 +5,9 @@ import Footer from "./secoes/Footer.jsx";
 import Card from "./secoes/Card.jsx";
 import Counter from "./secoes/Counter.jsx";
 import ControlHide from "./secoes/ControlHide.jsx";
+import InputAdd from "./secoes/InputAdd.jsx";
 
 export function App() {
-  const [value, setValue] = useState("");
   const [list, setList] = useState([
     { id: 1, label: "Fazer café", complete:false },
     { id: 2, label: "Fazer café", complete:false },
@@ -25,26 +25,21 @@ export function App() {
       <Card title="Card 4" />
       <Counter />
       <ControlHide />
-
-      <h2>Seção 4</h2>
-      <input value={value} onChange={(e) => setValue(e.target.value)} />
-
-      <button
-        onClick={() => {
-            setList([...list, { id: (list.length + 1).toString(), label: value, complete: false}])
-            setValue('')
-          }
-        }
-      >
-        Adicionar
-      </button>
+      <InputAdd
+        onAdd={(value) => {
+          setList([
+            ...list,
+            { id: (list.length + 1).toString(), complete: false, label: value }
+          ])
+        }}
+      />
 
       <ol>
         {list.map((listItem) => (
           <li key={listItem.id}>
             {listItem.label}
 
-            {listItem.complete ? 'Concluído' : ''}
+            {listItem.complete ? '✅' : ''}
 
             <button style={{marginLeft: '10px'}} 
               onClick={() => {
