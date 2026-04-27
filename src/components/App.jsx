@@ -9,11 +9,11 @@ import ControlHide from "./secoes/ControlHide.jsx";
 export function App() {
   const [value, setValue] = useState("");
   const [list, setList] = useState([
-    { id: 1, label: "Fazer café" },
-    { id: 2, label: "Fazer café" },
-    { id: 3, label: "Lavar a louça" },
-    { id: 4, label: "Limpar a casa" },
-  ]);
+    { id: 1, label: "Fazer café", complete:false },
+    { id: 2, label: "Fazer café", complete:false },
+    { id: 3, label: "Lavar a louça", complete:false },
+    { id: 4, label: "Limpar a casa", complete:false },
+  ])
 
   return (
     <>
@@ -30,8 +30,10 @@ export function App() {
       <input value={value} onChange={(e) => setValue(e.target.value)} />
 
       <button
-        onClick={() =>
-          setList([...list, { id: (list.length + 1).toString(), label: value }])
+        onClick={() => {
+            setList([...list, { id: (list.length + 1).toString(), label: value, complete: false}])
+            setValue('')
+          }
         }
       >
         Adicionar
@@ -39,7 +41,29 @@ export function App() {
 
       <ol>
         {list.map((listItem) => (
-          <li key={listItem.id}>{listItem.label}</li>
+          <li key={listItem.id}>
+            {listItem.label}
+
+            {listItem.complete ? 'Concluído' : ''}
+
+            <button style={{marginLeft: '10px'}} 
+              onClick={() => {
+                setList([
+                  ...list.map(item => ({
+                    ...item, 
+                    complete: item.id === listItem.id ? true : item.complete
+                  }))
+                ])
+              }}
+            >
+              Concluir
+            </button>
+
+            <button style={{marginLeft: '10px'}} onClick={() => setList([...list.filter(item => item.id !== listItem.id)])}>
+              Romover
+            </button>
+
+          </li>
         ))}
       </ol>
     </>
