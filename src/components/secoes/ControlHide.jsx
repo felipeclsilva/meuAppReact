@@ -5,7 +5,7 @@ export default function ControlHide() {
 
   return (
     <div>
-      <h2>Seção 3</h2>
+      <h2>Seção 3 </h2>
       <button
         style={{ display: "inline-block", marginRight: "8px" }}
         onClick={() => {
